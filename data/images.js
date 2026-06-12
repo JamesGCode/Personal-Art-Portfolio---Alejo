@@ -4,9 +4,6 @@
  *  - id          : unique identifier
  *  - main        : image shown "on top" (the one being revealed by the cursor)
  *  - behind      : image visible underneath as the cursor uncovers the main one
- *  - title       : artwork title (used for alt text and bottom-info)
- *  - category    : shown in project-meta
- *  - tags        : array of tag strings
  *
  * To load from an API, replace this array with a fetch() call and map the
  * response to this same shape before passing it to initPortfolio(images).

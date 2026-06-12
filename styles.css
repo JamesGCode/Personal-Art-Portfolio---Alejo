@@ -118,7 +118,7 @@ p {
   height: 75%;
   overflow: hidden;
 }
- 
+
 /* img-behind: always fully visible — the "bottom" layer */
 .img-behind {
   position: absolute;
@@ -133,7 +133,7 @@ p {
   mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask);
 }
- 
+
 /*
  * img-top-wrapper sits over img-behind.
  * It uses mask: url(#smudge-mask) — exactly like .hero-content-background
@@ -148,7 +148,7 @@ p {
   z-index: 2;
   /* No mask — always fully visible as the main image */
 }
- 
+
 .img-top {
   position: absolute;
   top: 50%;
@@ -158,7 +158,7 @@ p {
   height: 100%;
   object-fit: contain;
 }
- 
+
 /*
  * The SVG is absolutely positioned to cover the preview box exactly.
  * pointer-events: none so it doesn't block mouse events on the wrapper.
@@ -169,12 +169,9 @@ p {
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 4;   /* above the masked img-behind (z-index 3) */
+  z-index: 4; /* above the masked img-behind (z-index 3) */
   overflow: visible;
 }
-
-
-
 
 .minimap {
   position: absolute;
@@ -353,7 +350,7 @@ p {
     touch-action: none;
   }
 
-  .side-label {
+  /* .side-label {
     height: auto;
     width: 100vw;
   }
@@ -367,15 +364,116 @@ p {
     writing-mode: horizontal-tb;
 
     white-space: nowrap;
+  } */
+  /* .side-track {
+    flex-direction: row;
+  } */
+
+  .side-label {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 100vw;
+    height: auto;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 1;
+  }
+
+  .side-label span {
+    font-size: 8rem;
+    line-height: 0.85;
+
+    letter-spacing: 0.05em;
+
+    writing-mode: horizontal-tb;
+
+    white-space: nowrap;
+
+    color: #efefef;
+
+    -webkit-text-stroke: 1px #d8d8d8;
   }
 
   .side-track {
     flex-direction: row;
   }
 
+  .top-info {
+    position: absolute;
+
+    top: 1.25rem;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.5rem;
+
+    width: max-content;
+
+    z-index: 20;
+  }
+
+  .top-info p {
+    white-space: nowrap;
+  }
+
+  .contact-link {
+    position: absolute;
+
+    top: 3rem;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 11px;
+    text-align: center;
+    white-space: nowrap;
+    color: #9a9994;
+
+    z-index: 20;
+  }
+
+  .bottom-info {
+    position: absolute;
+
+    left: 50%;
+    bottom: 9.5rem;
+
+    transform: translateX(-50%);
+
+    align-items: center;
+    text-align: center;
+
+    gap: 0.5rem;
+
+    z-index: 20;
+  }
+
+  .project-meta {
+    align-items: center;
+  }
+
+  .tags {
+    border-top: none;
+    padding-top: 0;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 0.75rem;
+  }
+
   .site-info {
     position: absolute;
-    top: 73%;
+    top: 68%;
     right: 50%;
     transform: translateX(50%);
   }
@@ -420,8 +518,9 @@ p {
   }
 
   .img-preview {
-    top: 45%;
+    top: 39%;
     width: 75%;
     height: 50%;
+    z-index: 2;
   }
 }
