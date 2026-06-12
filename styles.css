@@ -136,6 +136,7 @@ p {
   object-fit: contain;
   /* Sits above img-top-wrapper so the mask reveal shows on top */
   z-index: 3;
+  filter: grayscale(100%) brightness(0.7);
   /* z-index: 1; */
   mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask);
