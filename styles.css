@@ -1,0 +1,427 @@
+@font-face {
+  font-family: "Ortica Linear";
+  src: url("./assets/fonts/OrticaLinear-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Epoch";
+  src: url("./assets/fonts/Epoch.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Thunder";
+  src: url("./assets/fonts/Thunder-SemiBoldHC.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Bigger Display";
+  src: url("./assets/fonts/BiggerDisplay.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Epoch", sans-serif;
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s;
+  user-select: none;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.side-label {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: auto;
+  pointer-events: none;
+}
+
+.side-label span {
+  display: block;
+  left: 0;
+  font-family: "Bigger Display", serif;
+
+  text-transform: uppercase;
+  font-size: 10rem;
+  line-height: 0.8;
+
+  color: #eaeaea;
+
+  -webkit-text-stroke: 1.5px #cccccc;
+
+  writing-mode: vertical-rl;
+
+  white-space: nowrap;
+  text-rendering: geometricPrecision;
+}
+
+.side-track {
+  display: flex;
+  flex-direction: column;
+
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+
+  backface-visibility: hidden;
+}
+
+.site-info {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  display: flex;
+  gap: 4px;
+}
+
+.site-info p span {
+  color: #9a9994;
+}
+
+/* ── Image preview — goo smudge reveal (Codegrid technique) ── */
+.img-preview {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 75%;
+  overflow: hidden;
+}
+ 
+/* img-behind: always fully visible — the "bottom" layer */
+.img-behind {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Sits above img-top-wrapper so the mask reveal shows on top */
+  z-index: 3;
+  mask: url(#smudge-mask);
+  -webkit-mask: url(#smudge-mask);
+}
+ 
+/*
+ * img-top-wrapper sits over img-behind.
+ * It uses mask: url(#smudge-mask) — exactly like .hero-content-background
+ * in the Codegrid reference. Only where the SVG goo blobs exist (white)
+ * will this layer be visible; everywhere else img-behind shows through.
+ */
+.img-top-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  /* No mask — always fully visible as the main image */
+}
+ 
+.img-top {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+ 
+/*
+ * The SVG is absolutely positioned to cover the preview box exactly.
+ * pointer-events: none so it doesn't block mouse events on the wrapper.
+ * Width/height are set in JS to match the preview box dimensions.
+ */
+.smudge-revealer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 4;   /* above the masked img-behind (z-index 3) */
+  overflow: visible;
+}
+
+
+
+
+.minimap {
+  position: absolute;
+  top: 50%;
+  right: 8em;
+  width: 80px;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  border: 1.2px solid #ff9b28;
+  z-index: 2;
+}
+
+.items {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  will-change: transform;
+}
+
+.item {
+  width: 100%;
+  height: 75px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+}
+
+.digit {
+  position: relative;
+  width: 0.65em;
+  height: 1.25em;
+  overflow: hidden;
+  font-size: 4em;
+  user-select: none;
+  font-family: "Epoch", serif;
+}
+
+#digit-tens {
+  transform: translateX(0.1em);
+}
+
+.digit span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1em;
+}
+
+.separator,
+.total-count {
+  line-height: 1em;
+  font-size: 4em;
+  font-family: "Epoch", serif;
+}
+
+.top-info {
+  position: fixed;
+  top: 2em;
+  left: 15em;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.top-info p {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.top-info p span {
+  color: #9a9994;
+}
+
+.contact-link {
+  position: fixed;
+  top: 2em;
+  right: 2em;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  text-decoration: none;
+  z-index: 10;
+  transition: color 0.2s ease;
+}
+
+.contact-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 1px;
+  background-color: #1a1a1a;
+  transition: width 0.3s ease;
+}
+
+.contact-link:hover::after {
+  width: 100%;
+}
+
+.contact-link:hover {
+  color: #9a9994;
+}
+
+.bottom-info {
+  position: fixed;
+  bottom: 2em;
+  left: 15em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.project-meta p {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.tags {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-top: 0.5em;
+  border-top: 1px solid #e0e0e0;
+}
+
+.tags span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9a9994;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  .container {
+    touch-action: none;
+  }
+
+  .side-label {
+    height: auto;
+    width: 100vw;
+  }
+
+  .side-label span {
+    font-size: 7em;
+    line-height: 0.8;
+    letter-spacing: 5px;
+    padding-top: 0.25em;
+
+    writing-mode: horizontal-tb;
+
+    white-space: nowrap;
+  }
+
+  .side-track {
+    flex-direction: row;
+  }
+
+  .site-info {
+    position: absolute;
+    top: 73%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .digit {
+    font-size: 2.8em;
+  }
+
+  .separator,
+  .total-count {
+    font-size: 2.8em;
+  }
+
+  .minimap {
+    top: auto;
+    right: auto;
+    bottom: 2em;
+    left: 50%;
+    width: auto;
+    height: 90px;
+    touch-action: none;
+  }
+
+  .indicator {
+    width: 60px;
+    height: 90px;
+    top: 0;
+    left: 0;
+  }
+
+  .items {
+    flex-direction: row;
+    width: max-content;
+    height: 100%;
+    touch-action: none;
+  }
+
+  .item {
+    width: 60px;
+    height: 100%;
+    padding: 5px;
+  }
+
+  .img-preview {
+    top: 45%;
+    width: 75%;
+    height: 50%;
+  }
+}

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="A responsive minimap for an art portfolio website."
+    />
+    <meta
+      name="keywords"
+      content="art portfolio, responsive design, minimap, web development"
+    />
+    <meta name="author" content="JamesGCode" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Art Portfolio</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="side-label">
+        <div class="side-track">
+          <span
+            >ALEJO • ILLUSTRATOR •
+            <span
+              class="current-year"
+              style="position: static; display: inline"
+            ></span>
+            •</span
+          >
+          <span
+            >ALEJO • ILLUSTRATOR •
+            <span
+              class="current-year"
+              style="position: static; display: inline"
+            ></span>
+            •</span
+          >
+          <span
+            >ALEJO • ILLUSTRATOR •
+            <span
+              class="current-year"
+              style="position: static; display: inline"
+            ></span>
+            •</span
+          >
+          <span
+            >ALEJO • ILLUSTRATOR •
+            <span
+              class="current-year"
+              style="position: static; display: inline"
+            ></span>
+            •</span
+          >
+          <span
+            >ALEJO • ILLUSTRATOR •
+            <span
+              class="current-year"
+              style="position: static; display: inline"
+            ></span>
+            •</span
+          >
+          <span
+            >ALEJO • ILLUSTRATOR •
+            <span
+              class="current-year"
+              style="position: static; display: inline"
+            ></span>
+            •</span
+          >
+        </div>
+      </div>
+
+      <div class="top-info">
+        <p>Alejo</p>
+        <p>Portfolio <span class="current-year"></span></p>
+      </div>
+
+      <a class="contact-link" href="mailto:alejo@email.com">alejo@email.com</a>
+
+      <div class="bottom-info">
+        <div class="project-meta">
+          <p id="meta-category">Illustration / Editorial</p>
+        </div>
+        <div class="tags" id="meta-tags">
+          <span>Concept Art</span>
+          <span>Sci-Fi</span>
+          <span>Digital</span>
+        </div>
+      </div>
+
+      <!-- ── Main image preview with goo-filter smudge reveal ── -->
+      <div class="img-preview" id="img-preview">
+        <!-- Main image: always fully visible (no mask) -->
+        <div class="img-top-wrapper" id="img-top-wrapper">
+          <img
+            class="img-top"
+            id="img-top"
+            src="./assets/img2.jpg"
+            alt="Image Preview"
+          />
+        </div>
+        <!-- Reveal image: masked by the goo SVG, appears where cursor has been -->
+        <img
+          class="img-behind"
+          id="img-behind"
+          src="./assets/img3.jpg"
+          alt="Image Behind"
+        />
+
+        <!--
+          SVG goo-filter mask (reference: ashleybrookecs / Codegrid technique).
+          - feGaussianBlur blurs circles so overlapping ones merge organically.
+          - feColorMatrix with high alpha multiplier thresholds the blur into
+            crisp ink-blot shapes.
+          - .hero-content-background (= img-top wrapper) uses mask: url(#smudge-mask)
+            so only the goo shape is visible, revealing img-behind underneath.
+        -->
+        <svg
+          class="smudge-revealer"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <filter id="smudge-goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="25" />
+              <feColorMatrix
+                type="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 60 -14"
+              />
+            </filter>
+          </defs>
+          <mask id="smudge-mask">
+            <g class="smudge-blobs" filter="url(#smudge-goo)"></g>
+          </mask>
+        </svg>
+      </div>
+
+      <div class="site-info">
+        <div class="counter">
+          <div class="digit" id="digit-tens"><span></span></div>
+          <div class="digit" id="digit-units"><span></span></div>
+          <span class="separator">/</span>
+          <span class="total-count"></span>
+        </div>
+      </div>
+
+      <div class="minimap">
+        <div class="indicator"></div>
+        <!-- Items are injected by main.js from the images array -->
+        <div class="items" id="minimap-items"></div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/three@0.179.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
