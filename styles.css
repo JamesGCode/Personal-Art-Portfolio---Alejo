@@ -114,9 +114,15 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: auto;
   height: 75%;
   overflow: hidden;
+  aspect-ratio: 2/3;
+}
+
+#img-top,
+#img-behind {
+  background-color: #2a2a2a; /* gris oscuro mientras carga */
 }
 
 /* img-behind: always fully visible — the "bottom" layer */
@@ -130,6 +136,7 @@ p {
   object-fit: contain;
   /* Sits above img-top-wrapper so the mask reveal shows on top */
   z-index: 3;
+  /* z-index: 1; */
   mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask);
 }
@@ -145,7 +152,10 @@ p {
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+   z-index: 2;
+
+  /* mask: url(#smudge-mask);
+  -webkit-mask: url(#smudge-mask); */
   /* No mask — always fully visible as the main image */
 }
 
