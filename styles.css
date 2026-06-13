@@ -707,6 +707,18 @@ p {
     z-index: 5;
   }
 
+  .nav-toggle {
+     position: absolute;
+    top: 3rem;
+    left: calc(50% - 28px); /* mitad del viewport menos la mitad del círculo (56px/2) */
+    transform: none;        /* elimina el transform que causa el desplazamiento */
+    z-index: 200;
+  }
+
+  .jp-label {
+    visibility: hidden;
+  }
+
   .top-info p {
     white-space: nowrap;
   }
@@ -805,7 +817,7 @@ p {
   }
 
   .img-preview {
-    top: 39%;
+    top: 40%;
     width: 75%;
     height: 50%;
     z-index: 2;

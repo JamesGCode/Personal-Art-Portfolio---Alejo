@@ -56,6 +56,17 @@ export function animateIntro(isHorizontal) {
   );
 
   tl.from(
+    ".nav-toggle",
+    {
+      scale: 0,
+      opacity: 0,
+      duration: 0.6,
+      ease: "back.out(2)",
+    },
+    "-=0.4",
+  );
+
+  tl.from(
     ".bottom-info",
     {
       y: 20,
