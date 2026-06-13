@@ -18,6 +18,83 @@
     <title>Art Portfolio</title>
   </head>
   <body>
+    <div class="nav-toggle">
+      <span class="nav-toggle-label">Bio</span>
+    </div>
+
+    <!-- <div class="menu">
+      <svg
+        class="menu-bg-svg"
+        viewBox="0 0 1131 861"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          id="menu-path"
+          fill="#f0eeee"
+          d="M1131,0 Q565.5,0 0,0 L0,0 L1131,0 Z"
+        />
+      </svg>
+
+      <div class="menu-col menu-col-info">
+        <p>Get in touch</p>
+
+        <h3>studio@clikd.co</h3>
+        <h3>+1 (437) 982 4412</h3>
+
+        <br />
+
+        <h6>42 Mercer Street</h6>
+        <h6>Toronto, ON M5V</h6>
+      </div>
+    </div> -->
+
+    <div class="menu">
+      <svg
+        class="menu-bg-svg"
+        viewBox="0 0 1131 861"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          id="menu-path"
+          fill="#f0eeee"
+          d="M1131,0 Q565.5,0 0,0 L0,0 L1131,0 Z"
+        />
+      </svg>
+
+      <div class="menu-inner">
+        <!-- Columna izquierda: texto -->
+        <div class="menu-col menu-col-info">
+          <div class="menu-artist-title">
+            <span class="menu-artist-name">Alejo</span>
+            <span class="menu-artist-role">Illustrator</span>
+          </div>
+
+          <p class="menu-artist-desc">
+            Digital illustrator based in Bogotá, specializing in concept art,
+            editorial illustration, and sci-fi worldbuilding. Creating worlds
+            one frame at a time since 2018.
+          </p>
+
+          <div class="menu-contact">
+            <p>Get in touch</p>
+            <h3>alejo@gmail.com</h3>
+            <h3>+57 323 239 9320</h3>
+            <br />
+            <h6>Bogotá, Colombia</h6>
+          </div>
+        </div>
+
+        <!-- Columna derecha: imagen -->
+        <div class="menu-col menu-col-image">
+          <div class="menu-img-wrapper">
+            <img src="./assets/images/img1.jpg" alt="Alejo — Illustrator" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="side-label">
         <div class="side-track">
@@ -77,7 +154,11 @@
         <p>Portfolio <span class="current-year"></span></p>
       </div>
 
-      <a class="contact-link" href="mailto:alejo@email.com">alejo@email.com</a>
+      <div class="jp-label">
+        <span>イラスト</span>
+      </div>
+
+      <!-- <a class="contact-link" href="mailto:alejo@email.com">alejo@email.com</a> -->
 
       <div class="bottom-info">
         <div class="project-meta">
@@ -94,20 +175,10 @@
       <div class="img-preview" id="img-preview">
         <!-- Main image: always fully visible (no mask) -->
         <div class="img-top-wrapper" id="img-top-wrapper">
-          <img
-            class="img-top"
-            id="img-top"
-            src=""
-            alt="Image Preview"
-          />
+          <img class="img-top" id="img-top" src="" alt="Image Preview" />
         </div>
         <!-- Reveal image: masked by the goo SVG, appears where cursor has been -->
-        <img
-          class="img-behind"
-          id="img-behind"
-          src=""
-          alt="Image Behind"
-        />
+        <img class="img-behind" id="img-behind" src="" alt="Image Behind" />
 
         <!--
           SVG goo-filter mask (reference: ashleybrookecs / Codegrid technique).
@@ -155,6 +226,7 @@
 
     <script src="https://unpkg.com/three@0.179.1/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script type="module" src="/animations/bio-section.js"></script>
     <script type="module" src="main.js"></script>
   </body>
 </html>

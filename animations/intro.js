@@ -54,7 +54,7 @@ export function animateIntro(isHorizontal) {
     },
     "-=0.6",
   );
-  
+
   tl.from(
     ".bottom-info",
     {
@@ -75,5 +75,17 @@ export function animateIntro(isHorizontal) {
       ease: "power3.out",
     },
     "<",
+  );
+
+  tl.from(
+    ".jp-label",
+    {
+      y: 80,
+      opacity: 0,
+      filter: "blur(20px)",
+      duration: 1.4,
+      ease: "power4.out",
+    },
+    "-=1",
   );
 }

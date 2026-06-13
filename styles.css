@@ -57,6 +57,282 @@ p {
   background-color: #fff;
 }
 
+.jp-label {
+  position: absolute;
+  left: 15em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.jp-label span {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: "Epoch", sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 0.35em;
+  color: #d0d0d0;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* .nav-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  cursor: pointer;
+  z-index: 100;
+  padding: 0.5rem;
+  pointer-events: all;
+}
+
+.nav-toggle-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+} */
+
+/* ── Nav toggle ── */
+.nav-toggle {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nav-toggle:hover {
+  background-color: #333;
+  transform: scale(1.07);
+}
+
+.nav-toggle:active {
+  transform: scale(0.96);
+}
+
+/* Track que desliza verticalmente entre "Bio" y "Close" */
+.nav-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2em;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.nav-toggle-label {
+  font-family: "Epoch", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  user-select: none;
+  pointer-events: none;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  padding: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.menu.is-open {
+  pointer-events: all;
+}
+
+.menu-bg-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+/*
+.menu-col-info p,
+.menu-col-info h3,
+.menu-col-info h6 {
+  opacity: 0;
+}
+
+.menu-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.menu-col a {
+  text-decoration: none;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 1.35;
+  display: block;
+  width: max-content;
+  overflow: hidden;
+}
+
+.menu-col p {
+  margin-bottom: 1rem;
+} */
+
+/* ── Menu inner grid ── */
+.menu-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  padding: 2.5rem;
+}
+
+/* ── Columna info ── */
+.menu-col-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+/* ── Título del artista ── */
+.menu-artist-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.85;
+}
+
+.menu-artist-name {
+  font-family: "Bigger Display", serif;
+  font-size: clamp(5rem, 10vw, 10rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  letter-spacing: -0.001em;
+}
+
+.menu-artist-role {
+  font-family: "Epoch", sans-serif;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #9a9994;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+/* ── Descripción ── */
+.menu-artist-desc {
+  font-family: "Epoch", sans-serif;
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 600;
+  line-height: 1.7;
+  color: #4a4a4a;
+  max-width: 38ch;
+  letter-spacing: 0.02em;
+}
+
+/* ── Info de contacto ── */
+.menu-contact p {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9a9994;
+  margin-bottom: 0.5rem;
+}
+
+.menu-contact h3 {
+  font-family: "Epoch", sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+
+.menu-contact h6 {
+  font-family: "Epoch", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9a9994;
+  line-height: 1.6;
+}
+
+/* ── Columna imagen ── */
+.menu-col-image {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.menu-img-wrapper {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+
+.menu-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.4s ease;
+}
+
+.menu-img-wrapper img:hover {
+  filter: grayscale(0%);
+}
+
+/* ── Responsive: ocultar imagen en móvil ── */
+@media (max-width: 768px) {
+  .menu-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+    align-items: end;
+  }
+
+  .menu-col-image {
+    display: none;
+  }
+
+  .menu-artist-name {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+  .menu-artist-desc {
+    max-width: 100%;
+  }
+}
+
 .side-label {
   position: fixed;
   display: flex;
@@ -153,7 +429,7 @@ p {
   inset: 0;
   width: 100%;
   height: 100%;
-   z-index: 2;
+  z-index: 2;
 
   /* mask: url(#smudge-mask);
   -webkit-mask: url(#smudge-mask); */
@@ -261,7 +537,7 @@ p {
   flex-direction: column;
   gap: 1px;
   pointer-events: none;
-  z-index: 10;
+  z-index: 5;
 }
 
 .top-info p {
@@ -287,7 +563,7 @@ p {
   text-transform: uppercase;
   color: #1a1a1a;
   text-decoration: none;
-  z-index: 10;
+  z-index: 5;
   transition: color 0.2s ease;
 }
 
@@ -316,7 +592,7 @@ p {
   flex-direction: column;
   gap: 0.6em;
   pointer-events: none;
-  z-index: 10;
+  z-index: 5;
 }
 
 .project-meta {
@@ -361,24 +637,24 @@ p {
     touch-action: none;
   }
 
-  /* .side-label {
-    height: auto;
-    width: 100vw;
+  .menu-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+    align-items: end;
   }
 
-  .side-label span {
-    font-size: 7em;
-    line-height: 0.8;
-    letter-spacing: 5px;
-    padding-top: 0.25em;
+  .menu-col-image {
+    display: none;
+  }
 
-    writing-mode: horizontal-tb;
+  .menu-artist-name {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
 
-    white-space: nowrap;
-  } */
-  /* .side-track {
-    flex-direction: row;
-  } */
+  .menu-artist-desc {
+    max-width: 100%;
+  }
 
   .side-label {
     position: absolute;
@@ -428,7 +704,7 @@ p {
 
     width: max-content;
 
-    z-index: 20;
+    z-index: 5;
   }
 
   .top-info p {
@@ -448,7 +724,7 @@ p {
     white-space: nowrap;
     color: #9a9994;
 
-    z-index: 20;
+    z-index: 5;
   }
 
   .bottom-info {
@@ -464,7 +740,7 @@ p {
 
     gap: 0.5rem;
 
-    z-index: 20;
+    z-index: 5;
   }
 
   .project-meta {
