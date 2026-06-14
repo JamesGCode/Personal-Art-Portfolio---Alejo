@@ -255,6 +255,197 @@ export function animateIntro(isHorizontal) {
         ease: "power2.inOut",
       });
   }
+  // function startReveal() {
+  //   const previewEl = document.querySelector(".img-preview");
+  //   const jpLabelEl = document.querySelector(".jp-label");
+  //   const previewR = previewEl.getBoundingClientRect();
+  //   const boxR = box.getBoundingClientRect();
+
+  //   // Delta original — funciona porque box sigue dentro del overlay
+  //   const deltaX =
+  //     previewR.left + previewR.width / 2 - (boxR.left + boxR.width / 2);
+  //   const deltaY =
+  //     previewR.top + previewR.height / 2 - (boxR.top + boxR.height / 2);
+
+  //   // ── Canvas negro detrás de todo ──
+  //   const canvas = document.createElement("canvas");
+  //   const W = window.innerWidth;
+  //   const H = window.innerHeight;
+  //   canvas.width = W;
+  //   canvas.height = H;
+  //   // Object.assign(canvas.style, {
+  //   //   position: "fixed",
+  //   //   inset: "0",
+  //   //   zIndex: "9998", // debajo del overlay (9999)
+  //   //   pointerEvents: "none",
+  //   // });
+  //   Object.assign(canvas.style, {
+  //     position: "fixed",
+  //     inset: "0",
+  //     zIndex: "9998",
+  //     pointerEvents: "none",
+  //     opacity: "1",
+  //     willChange: "opacity",
+  //   });
+  //   document.body.appendChild(canvas);
+  //   const ctx = canvas.getContext("2d");
+  //   ctx.fillStyle = "#000";
+  //   ctx.fillRect(0, 0, W, H);
+
+  //   const COLS = 28;
+  //   const ROWS = 18;
+  //   const blockW = W / COLS;
+  //   const blockH = H / ROWS;
+
+  //   const blocks = [];
+  //   for (let r = 0; r < ROWS; r++) {
+  //     for (let c = 0; c < COLS; c++) {
+  //       blocks.push({
+  //         x: c * blockW,
+  //         y: r * blockH,
+  //         w: blockW + 1,
+  //         h: blockH + 1,
+  //         row: r,
+  //       });
+  //     }
+  //   }
+
+  //   const totalDuration = 1.2;
+  //   const burnDuration = 0.5;
+  //   const stagger = totalDuration / ROWS;
+
+  //   blocks.forEach((b) => {
+  //     const rowFromBottom = ROWS - 1 - b.row;
+  //     const noise = (Math.random() - 0.5) * stagger * 1.2;
+  //     b.appearAt = rowFromBottom * stagger * 0.55 + Math.max(0, noise);
+  //   });
+
+  //   const maxEnd = Math.max(...blocks.map((b) => b.appearAt + burnDuration));
+
+  //   let startTime = null;
+  //   let rafId;
+
+  //   function lerp(a, b, t) {
+  //     return a + (b - a) * Math.max(0, Math.min(1, t));
+  //   }
+
+  //   function drawFrame(ts) {
+  //     if (!startTime) startTime = ts;
+  //     const elapsed = (ts - startTime) / 1000;
+
+  //     ctx.fillStyle = "#000";
+  //     ctx.fillRect(0, 0, W, H);
+
+  //     blocks.forEach((b) => {
+  //       if (elapsed < b.appearAt) return;
+  //       const t = Math.min((elapsed - b.appearAt) / burnDuration, 1);
+  //       const v = Math.round(lerp(0, 255, t));
+  //       ctx.fillStyle = `rgb(${v},${v},${v})`;
+  //       ctx.fillRect(b.x, b.y, b.w, b.h);
+  //     });
+
+  //     if (elapsed >= maxEnd) {
+  //       cancelAnimationFrame(rafId);
+
+  //       gsap.set(previewEl, {
+  //         visibility: "visible",
+  //         opacity: 1,
+  //       });
+
+  //       gsap.set(jpLabelEl, {
+  //         visibility: "visible",
+  //         opacity: 1,
+  //       });
+
+  //       revealPage(isHorizontal);
+
+  //       gsap.to(canvas, {
+  //         opacity: 0,
+  //         duration: 0.35,
+  //         ease: "power2.out",
+  //         onComplete() {
+  //           canvas.remove();
+  //         },
+  //       });
+
+  //       return;
+  //     }
+
+  //     rafId = requestAnimationFrame(drawFrame);
+  //   }
+
+  //   // const exit = gsap.timeline();
+
+  //   // exit
+  //   //   .to([corners, labelT, kata, pct], {
+  //   //     opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in",
+  //   //   })
+  //   //   // El fondo del overlay se vuelve transparente pero NO su opacidad
+  //   //   // así box sigue visible y los deltas siguen siendo válidos
+  //   //   .call(() => {
+  //   //     overlay.style.background = "transparent";
+  //   //     overlay.style.pointerEvents = "none";
+  //   //   })
+  //   //   // Canvas y vuelo de la caja arrancan al mismo tiempo
+  //   //   .to(box, {
+  //   //     x: deltaX,
+  //   //     y: deltaY,
+  //   //     width:  previewR.width,
+  //   //     height: previewR.height,
+  //   //     duration: 1.05, ease: "power4.inOut",
+  //   //     onComplete() {
+  //   //       overlay.remove();
+  //   //     },
+  //   //   })
+  //   //   .call(() => {
+  //   //     rafId = requestAnimationFrame(drawFrame);
+  //   //   }, null, "<");
+  //   const exit = gsap.timeline();
+
+  //   exit
+  //     .to([corners, labelT, kata, pct], {
+  //       opacity: 0,
+  //       duration: 0.2,
+  //       stagger: 0.02,
+  //       ease: "power2.in",
+  //     })
+  //     // Canvas ya visible ANTES de tocar el overlay
+  //     .call(() => {
+  //       ctx.fillStyle = "#000";
+  //       ctx.fillRect(0, 0, W, H);
+  //     })
+  //     .call(
+  //       () => {
+  //         overlay.style.background = "transparent";
+  //         overlay.style.pointerEvents = "none";
+  //       },
+  //       null,
+  //       "+=0.02",
+  //     )
+  //     // Ahora sí el overlay se vuelve transparente — el canvas negro lo reemplaza sin gap
+  //     .call(() => {
+  //       overlay.style.background = "transparent";
+  //       overlay.style.pointerEvents = "none";
+  //     })
+  //     .to(box, {
+  //       x: deltaX,
+  //       y: deltaY,
+  //       width: previewR.width,
+  //       height: previewR.height,
+  //       duration: 1.05,
+  //       ease: "power4.inOut",
+  //       onComplete() {
+  //         overlay.remove();
+  //       },
+  //     })
+  //     .call(
+  //       () => {
+  //         rafId = requestAnimationFrame(drawFrame);
+  //       },
+  //       null,
+  //       "<",
+  //     );
+  // }
 }
 
 function revealPage(isHorizontal) {
@@ -288,7 +479,7 @@ function revealPage(isHorizontal) {
           gsap.set(".img-preview", { visibility: "visible", scale: 0.96 });
         },
       },
-      "-=0.9",
+      "<",
     )
     .to(
       ".counter",
@@ -302,7 +493,7 @@ function revealPage(isHorizontal) {
           gsap.set(".counter", { visibility: "visible", y: 20 });
         },
       },
-      "-=0.6",
+      "-=0.8",
     )
     .to(
       ".minimap",
@@ -320,7 +511,7 @@ function revealPage(isHorizontal) {
           });
         },
       },
-      "-=0.5",
+      "<",
     )
     .to(
       ".top-info",
@@ -334,7 +525,34 @@ function revealPage(isHorizontal) {
           gsap.set(".top-info", { visibility: "visible", y: -20 });
         },
       },
-      "-=0.5",
+      "-=0.6",
+    )
+    .to(
+      ".bottom-info",
+      {
+        visibility: "visible",
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        onStart() {
+          gsap.set(".bottom-info", { visibility: "visible", y: 20 });
+        },
+      },
+      "<",
+    )
+    .to(
+      ".jp-label",
+      {
+        // visibility: "visible",
+        // opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+        onStart() {
+          gsap.set(".jp-label", { visibility: "visible" });
+        },
+      },
+      "<",
     )
     .to(
       ".nav-toggle",
@@ -350,31 +568,7 @@ function revealPage(isHorizontal) {
       },
       "-=0.3",
     )
-    .to(
-      ".bottom-info",
-      {
-        visibility: "visible",
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        onStart() {
-          gsap.set(".bottom-info", { visibility: "visible", y: 20 });
-        },
-      },
-      "-=0.4",
-    )
-    .to(
-      ".jp-label",
-      {
-        // visibility: "visible",
-        // opacity: 1,
-        duration: 0.6,
-        ease: "power2.out",
-        onStart() {
-          gsap.set(".jp-label", { visibility: "visible" });
-        },
-      },
-      "-=0.5",
-    );
+    .call(() => {
+      gsap.set(".menu", { opacity: 1 }); // restaura el menú para cuando se abra
+    });
 }

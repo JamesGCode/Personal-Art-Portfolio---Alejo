@@ -21,6 +21,8 @@ const CLOSE_HIDDEN = `M${svgWidth},${svgHeight} Q${svgCenterX},${svgHeight} 0,${
 gsap.set(menuBg, { attr: { d: OPEN_HIDDEN } });
 gsap.set(menuInfoItems, { opacity: 0, y: 100 });
 
+gsap.set(menu, { visibility: "visible" });
+
 let isOpen      = false;
 let isAnimating = false;
 
